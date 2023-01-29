@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous">
+
+    <style>
+        .my-footer {
+          height: 5em;
+          padding: 1em;
+          background-color: #163b65;
+          margin-top: 1.5em;
+          color: #fff;
+          font-size: 80%;
+        }
+
+        .room-image {
+          max-width: 50%;
+        }
+
+      </style>
+    <title>My Nice Page</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark"
+      data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Rooms
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="generals.html">General's Quarters</a></li>
+                <li><a class="dropdown-item" href="majors.html">Major's Suite</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html">Book Now</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Make Reservation</h1>
+
+          <form action="" method="post" class="needs-validation" novalidate>
+            <div class="mt-5">
+              <label for="first_name" class="form-label">First Name</label>
+              <input required autocomplete="off" type="text"
+                class="form-control" id="first_name"
+                name="first_name" aria-describedby="firstNameHelp">
+              <div class="invalid-feedback">
+                <small id="first_name" class="form-text text-muted">Enter your first name</small>
+              </div>
+            </div>
+
+            <div class="">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input required autocomplete="off" type="text"
+                class="form-control" id="last_name"
+                name="last_name" aria-describedby="lastNameHelp">
+              <div class="invalid-feedback">
+                <small id="last_name" class="form-text text-muted">Enter your last name</small>
+              </div>
+            </div>
+
+            <div class="">
+              <label for="email_address" class="form-label">Email Address</label>
+              <input required autocomplete="off" type="email"
+                class="form-control" id="emailAddress"
+                name="email_address" aria-describedby="emailAddressHelp">
+              <div class="invalid-feedback">
+                <small id="email_address" class="form-text text-muted">Enter your email address</small>
+              </div>
+            </div>
+
+            <div class="">
+              <label for="phone_number" class="form-label">Phone Number</label>
+              <input required autocomplete="off" type="text"
+                class="form-control" id="phone_number"
+                name="phone_number" aria-describedby="phoneNumberHelp">
+              <div class="invalid-feedback">
+                <small id="phone_number" class="form-text text-muted">Enter your Phone Number</small>
+              </div>
+            </div>
+
+            <hr />
+
+            <input type="submit" class="btn btn-primary" value="Make Reservation"></input>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-footer">
+      <div class="col">
+        Left
+      </div>
+
+      <div class="col">
+        Middle
+      </div>
+
+      <div class="col">
+        Right
+      </div>
+
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+      crossorigin="anonymous"></script>
+  </body>
+</html>
