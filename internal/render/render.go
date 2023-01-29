@@ -8,8 +8,8 @@ import (
 	"text/template"
 
 	"github.com/justinas/nosurf"
-	"github.com/pickledev/bookings/pkg/config"
-	"github.com/pickledev/bookings/pkg/models"
+	"github.com/pickledev/bookings/internal/config"
+	"github.com/pickledev/bookings/internal/models"
 )
 
 var app *config.AppConfig

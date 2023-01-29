@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/pickledev/bookings/pkg/config"
-	"github.com/pickledev/bookings/pkg/handlers"
-	"github.com/pickledev/bookings/pkg/render"
+	"github.com/pickledev/bookings/internal/config"
+	"github.com/pickledev/bookings/internal/handlers"
+	"github.com/pickledev/bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
 )
 
