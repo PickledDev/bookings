@@ -1,37 +1,38 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <img src="/static/images/generals-quarters.png" class="img-fluid
-            img-thumbnail mx-auto d-block room-image"
-            alt="room image">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col">
-          <h1 class="text-center mt-4">General's Quarters</h1>
-          <p>Your home away from home, set on the majestic Rhine river. Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Accusamus error
-            minima, quia sapiente, consequuntur quis necessitatibus ipsa
-            nesciunt voluptatum, quidem optio ad eaque atque officiis rerum odio
-            eius non. Veniam.
-          </p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col text-center">
-          <a href="#!" id="check-availability-button" class="btn btn-success">Check Availability</a>
-        </div>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="/static/images/generals-quarters.png" class="img-fluid
+        img-thumbnail mx-auto d-block room-image"
+        alt="room image">
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-4">General's Quarters</h1>
+      <p>Your home away from home, set on the majestic Rhine river. Lorem
+        ipsum dolor sit amet consectetur adipisicing elit. Accusamus error
+        minima, quia sapiente, consequuntur quis necessitatibus ipsa
+        nesciunt voluptatum, quidem optio ad eaque atque officiis rerum odio
+        eius non. Veniam.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+      <a href="#!" id="check-availability-button" class="btn btn-success">Check
+        Availability</a>
+    </div>
+  </div>
+</div>
 {{end}}
 
 {{define "js"}}
-    <script>
+<script>
       document.getElementById("check-availability-button").addEventListener("click", function(){
         let html = `
           <form id="check-availablity-form" action="" method="post" novalidate class="needs-validation">
@@ -50,12 +51,41 @@
             </div>
           </form>
         `
-        // notify("This is my message", "error")
-        // notifyModal("title", "<em>hello world</em>", "success", "My Text for the button")
-        // attention.toast({msg: "Hello", icon: "error"})
-        // attention.success({msg: "Hello"})
-        // attention.error({msg: "uh oh"})
-        attention.custom({msg: html, title: "Choose your dates"})
+
+        attention.custom({
+          msg: html,
+          title: "Choose your dates",
+          willOpen: () => {
+            const elem = document.getElementById("reservation-dates-modal")
+            const rp = new DateRangePicker(elem, {
+              format: 'yyyy-mm-dd',
+              showOnFocus: true,
+              orientation: 'top',
+            })
+          },
+          didOpen: () => {
+            document.getElementById("start").removeAttribute("disabled")
+            document.getElementById("end").removeAttribute("disabled")
+          },
+          callback: function(result){
+            console.log("called")
+
+            let form = document.getElementById("check-availablity-form")
+            let formData = new FormData(form)
+            formData.append("csrf_token", "{{.CSRFToken}}")
+
+            fetch('/search-availability-json', {
+              method: "post",
+              body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data)
+              console.log(data.ok)
+              console.log(data.message)
+            })
+          }
+        })
       })
 
     </script>
