@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/pickledev/bookings/internal/config"
+	"github.com/pickledev/bookings/internal/forms"
 	"github.com/pickledev/bookings/internal/models"
 	"github.com/pickledev/bookings/internal/render"
 )
@@ -52,9 +53,16 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "about.page.html", &models.TemplateData{StringMap: stringMap})
 }
 
-// Generals renders the generals room page
+// Reservation renders the make reservation page and displays form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+// PostReservation handles the posting of a reservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
+
 }
 
 // Generals renders the generals room page
