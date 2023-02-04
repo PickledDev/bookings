@@ -1,0 +1,11 @@
+Normal test:
+go test
+
+Test Verbose:
+go test -v
+
+Test Coverage to an HTML output
+go test -coverprofile=coverage.out && go tool cover -html=coverage.out
+
+Be sure to be in the cmd/web directory when running the go test commands.
+
