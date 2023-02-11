@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
-	"text/template"
+	"html/template"
 
 	"github.com/justinas/nosurf"
 	"github.com/pickledev/bookings/internal/config"
