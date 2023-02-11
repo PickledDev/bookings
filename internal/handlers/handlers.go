@@ -153,7 +153,7 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
 	// pull that name "reservation" out of the session and type cast it as models.Reservation
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
-	if !ok{
+	if !ok {
 		log.Println("cannot get item from session")
 		m.App.Session.Put(r.Context(), "error", "cannot get reservation from session")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
