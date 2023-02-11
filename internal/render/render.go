@@ -4,10 +4,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"log"
+	"html/template"
 	"net/http"
 	"path/filepath"
-	"html/template"
 
 	"github.com/justinas/nosurf"
 	"github.com/pickledev/bookings/internal/config"
@@ -17,7 +16,7 @@ import (
 var functions = template.FuncMap{}
 
 var app *config.AppConfig
-var pathToTemplates = "./../../templates"
+var pathToTemplates = "./templates"
 
 // NewTemplate sets the config for the template package
 func NewTemplates(a *config.AppConfig) {
@@ -55,7 +54,6 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *mod
 	// render the template
 	_, err := buf.WriteTo(w)
 	if err != nil {
-		log.Println("error writing template to browser", err)
 		return err
 	}
 
