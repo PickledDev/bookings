@@ -3,3 +3,7 @@
 
 # don't store the executable
 bookings
+
+# don't store the database yml
+database.yml
+schema.sql
