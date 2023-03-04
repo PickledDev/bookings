@@ -1,19 +1,20 @@
 package main
 
 import (
+	"github.com/alexedwards/scs/v2"
+	"github.com/pickledev/bookings/internal/config"
+	"github.com/pickledev/bookings/internal/driver"
+	"github.com/pickledev/bookings/internal/handlers"
+	"github.com/pickledev/bookings/internal/helpers"
+	"github.com/pickledev/bookings/internal/models"
+	"github.com/pickledev/bookings/internal/render"
+
 	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"time"
-
-	"github.com/alexedwards/scs/v2"
-	"github.com/pickledev/bookings/internal/config"
-	"github.com/pickledev/bookings/internal/handlers"
-	"github.com/pickledev/bookings/internal/helpers"
-	"github.com/pickledev/bookings/internal/models"
-	"github.com/pickledev/bookings/internal/render"
 )
 
 const portNumber = ":8080"
@@ -25,10 +26,11 @@ var errorLog *log.Logger
 
 // main is the main application function
 func main() {
-	err := run()
+	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.SQL.Close()
 
 	fmt.Printf("starting application on port %s\n", portNumber)
 
@@ -41,7 +43,7 @@ func main() {
 	log.Fatal(err)
 }
 
-func run() error {
+func run() (*driver.DB, error) {
 	// what am I going to put in the session
 	gob.Register(models.Reservation{})
 
@@ -62,19 +64,27 @@ func run() error {
 
 	app.Session = session
 
+	// connect to database
+	log.Println("connecting to database...")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=michaelirwin password=")
+	if err != nil {
+		log.Fatal("cannot connect to database! dying...")
+	}
+	log.Println("connected to database")
+	
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("cannot create template cache")
-		return err
+		return nil, err
 	}
 
 	app.TemplateCache = tc
 	app.UseCache = false
 
-	repo := handlers.NewRepo(&app)
+	repo := handlers.NewRepo(&app, db)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
 	helpers.NewHelpers(&app)
 
-	return nil
+	return db, nil
 }

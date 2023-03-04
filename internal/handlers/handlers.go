@@ -6,10 +6,13 @@ import (
 	"net/http"
 
 	"github.com/pickledev/bookings/internal/config"
+	"github.com/pickledev/bookings/internal/driver"
 	"github.com/pickledev/bookings/internal/forms"
 	"github.com/pickledev/bookings/internal/helpers"
 	"github.com/pickledev/bookings/internal/models"
 	"github.com/pickledev/bookings/internal/render"
+	"github.com/pickledev/bookings/internal/repository"
+	"github.com/pickledev/bookings/internal/repository/dbrepo"
 )
 
 // Repo the repository used by the handlers
@@ -18,12 +21,14 @@ var Repo *Repository
 // Repository is the repsitory type
 type Repository struct {
 	App *config.AppConfig
+	DB  repository.DatabaseRepo
 }
 
 // NewRepo creates a new repsitory
-func NewRepo(a *config.AppConfig) *Repository {
+func NewRepo(a *config.AppConfig, db *driver.DB) *Repository {
 	return &Repository{
 		App: a,
+		DB:  dbrepo.NewPostgresRepo(db.SQL, a),
 	}
 }
 
